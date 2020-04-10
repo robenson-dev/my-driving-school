@@ -2,6 +2,13 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+TEMPLATE_DIR = os.path.join(os.path.dirname(BASE_DIR), 'templates')
+STATIC_FILE_DIR = os.path.join(os.path.dirname(BASE_DIR), 'static')
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+   "django.template.context_processors.request",
+)
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -9,6 +16,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'Secretary.apps.SecretaryConfig',
+
+    'schedule',
+    'djangobower',
+    # 'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -19,6 +32,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -26,7 +41,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': (TEMPLATE_DIR,),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -40,7 +55,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -57,8 +71,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr-fr'
 
 TIME_ZONE = 'UTC'
 
@@ -69,3 +82,21 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (STATIC_FILE_DIR, )
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static/assets/css/main.css")
+
+
+# STATICFILES_FINDERS = ['djangobower.finders.BowerFinder', ]
+# BOWER_COMPONENTS_ROOT = 'static/components/'
+#
+# BOWER_INSTALLED_APPS = (
+#     'jquery',
+#     'jquery-ui',
+#     'bootstrap'
+# )
+#
+# INTERNAL_IPS = [
+#     # ...
+#     '127.0.0.1',
+#     # ...
+# ]
