@@ -7,9 +7,11 @@ verify_ssl = true
 
 [packages]
 django = "*"
-django-scheduler = "*"
-django-bower = "*"
-django-debug-toolbar = "*"
+django-phone-field = "*"
+django-ckeditor = "*"
+pillow = "*"
+django-crispy-forms = "*"
+django-colorfield = "*"
 
 [requires]
 python_version = "3.7"
