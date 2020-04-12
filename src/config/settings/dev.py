@@ -1,6 +1,9 @@
 from .defaults import *
 
 DEBUG = True
+ALLOWED_HOSTS += ['0.0.0.0', 'localhost']
+
+WSGI_APPLICATION = 'config.wsgi.dev.application'
 
 DATABASES = {
     'default': {
@@ -9,6 +12,6 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
-
-SECRET_KEY = 'yy1(ruls3vkcfz%)-rafx_rbgw%jm&@w+cdxrhi&hsek1^war4'
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+)
