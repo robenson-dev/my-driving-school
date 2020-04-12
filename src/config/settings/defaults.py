@@ -2,6 +2,10 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
+DEBUG = True
+ALLOWED_HOSTS = []
+
 TEMPLATE_DIR = os.path.join(os.path.dirname(BASE_DIR), 'templates')
 STATIC_FILE_DIR = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
@@ -18,10 +22,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'Secretary.apps.SecretaryConfig',
+    'instructor.apps.InstructorConfig',
+    'planning.apps.PlanningConfig',
 
-    'schedule',
-    'djangobower',
-    # 'debug_toolbar'
+    'phone_field',
+    'ckeditor',
+    'crispy_forms',
+    'colorfield'
+
+
 ]
 
 MIDDLEWARE = [
@@ -54,31 +63,15 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# AUTH_USER_MODEL = 'Secretary.User'
+# ACCOUNT_UNIQUE_EMAIL = True
+# AUTH_USER_MODEL = "Secretary.User"
 
 LANGUAGE_CODE = 'fr-fr'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 STATIC_URL = '/static/'
