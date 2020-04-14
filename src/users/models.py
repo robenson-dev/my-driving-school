@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -13,15 +14,29 @@ GENDER_CHOICES = (
 
 class User(AbstractUser):
 
-    is_secretary    = models.BooleanField(default=False)
+    is_secretary  = models.BooleanField(default=False)
     is_instructor = models.BooleanField(default=False)
     is_student    = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return reverse('secretary:instructor-detail',kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('secretary:instructor-update',kwargs={'pk':self.pk})
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'
 
     def __str__(self):
         return self.username
+
+class Secretary(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
 
 
 class Student(models.Model):

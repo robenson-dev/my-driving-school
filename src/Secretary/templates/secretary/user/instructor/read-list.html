@@ -9,7 +9,7 @@
       </div>
     {% endfor %}
   {% endif %}
-  <a class="btn btn-info" href="{% url 'secretary:create' %}">ADD NEW</a>
+  <!-- <a class="btn btn-info" href="{% url 'secretary:instructor-create' %}">ADD NEW</a> -->
   <table class="table table-striped">
     <thead>
       <tr>
@@ -22,13 +22,15 @@
     </thead>
     <tbody>
       {% for user in users_form %}
-      <tr>
-        <th scope="row">{{ user.id }}</th>
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        <td><a href="{% url 'secretary:update' userID=user.id %}">edit</a></td>
-        <td><a href="#">delete</a></td>
-      </tr>
+          {% if user.is_superuser != True %}
+            <tr>
+              <th scope="row">{{ user.id }}</th>
+              <td>{{ user.username }}</td>
+              <td>{{ user.email }}</td>
+              <td><a href="{% url 'secretary:instructor-update' pk=user.id %}">edit</a></td>
+              <td><a href="{% url 'secretary:instructor-delete' pk=user.id %}">delete</a></td>
+            </tr>
+          {% endif %}
       {% endfor %}
     </tbody>
   </table>

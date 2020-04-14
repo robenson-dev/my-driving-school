@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'Secretary.apps.SecretaryConfig',
     'instructor.apps.InstructorConfig',
     'planning.apps.PlanningConfig',
+    'users.apps.UsersConfig',
 
     'phone_field',
     'ckeditor',
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
 
 
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,7 +66,7 @@ TEMPLATES = [
 ]
 
 
-# AUTH_USER_MODEL = 'Secretary.User'
+AUTH_USER_MODEL = 'users.User'
 # ACCOUNT_UNIQUE_EMAIL = True
 # AUTH_USER_MODEL = "Secretary.User"
 
@@ -77,19 +79,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (STATIC_FILE_DIR, )
 # STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static/assets/css/main.css")
-
-
-# STATICFILES_FINDERS = ['djangobower.finders.BowerFinder', ]
-# BOWER_COMPONENTS_ROOT = 'static/components/'
-#
-# BOWER_INSTALLED_APPS = (
-#     'jquery',
-#     'jquery-ui',
-#     'bootstrap'
-# )
-#
-# INTERNAL_IPS = [
-#     # ...
-#     '127.0.0.1',
-#     # ...
-# ]

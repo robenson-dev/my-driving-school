@@ -1,43 +1,68 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from users.models import User
-from users.forms import UserRegisterForm, UserUpdateForm, InstructorForm
-from django.contrib import messages
+from django.views.generic import (
+    CreateView,
+    ListView,
+    DetailView,
+    UpdateView,
+    DeleteView,
+    FormView
+)
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+from users.models import User
+from users.forms import UserRegisterForm
+from django.contrib import messages
 
 
 def index(request):
     return render(request, 'secretary/home-list.html', locals())
 
 
-def create_instructor(request):
+class InstructorCreateView(LoginRequiredMixin, SuccessMessageMixin, FormView):
 
-    user_form = UserRegisterForm(request.POST or None)
-    if user_form.is_valid():
-        user_form.save()
-        username = user_form.cleaned_data.get('username')
-        messages.success(request, f' The {username} account has been created')
-        return redirect('secretary:read-list')
+    template_name = 'secretary/user/instructor/create.html'
+    form_class = UserRegisterForm
+    success_message = f' The user account has been created'
+    success_url = '/secretary/instructor/'
 
-    return render(request, 'secretary/user/instructor/created.html', locals())
-
-
-def read_instructor(request):
-    users_form = User.objects.all()
-    return render(request, 'secretary/user/instructor/read-list.html', locals())
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 
-def update_instructor(request, userID=None):
+class InstructorListView(LoginRequiredMixin, ListView):
 
-    user = get_object_or_404(User, id=userID)
+    model = User
+    template_name = 'secretary/user/instructor/read-list.html'
+    context_object_name = 'users_form'
+    ordering = ['-date_joined']
 
-    if request.method == 'POST':
-        user_form = UserRegisterForm(request.POST, instance=user)
-        if user_form.is_valid():
-            user_form.save()
-            username = user_form.cleaned_data.get('username')
-            messages.success(request, f' The {username} account has been updated')
-            return redirect('secretary:read-list')
-    else:
-        user_form = UserRegisterForm(instance=user)
+        # if user.is_secretary:
+            # return True
+        # return False
 
-    return render(request, 'secretary/user/instructor/update.html', locals())
+
+class InstructorDetailView(DetailView):
+
+    model = User
+    template_name = 'secretary/user/instructor/read-detail.html'
+
+
+class InstructorUpdateView(LoginRequiredMixin,UpdateView):
+
+    model = User
+    template_name = 'secretary/user/instructor/update.html'
+    fields = ['first_name', 'last_name', 'username', 'email']
+    context_object_name = 'form'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+class InstructorDeleteView(DeleteView):
+
+    model = User
+    template_name = 'secretary/user/instructor/delete.html'
+    success_url = '/secretary/instructor/'

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import User
 
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
@@ -17,7 +17,7 @@ class Event(models.Model):
         null=True,
         blank=True,
         verbose_name="creator",
-        related_name="creator",
+        related_name='snippets'
     )
     created_on = models.DateTimeField("created on", auto_now_add=True)
     updated_on = models.DateTimeField("updated on", auto_now=True)

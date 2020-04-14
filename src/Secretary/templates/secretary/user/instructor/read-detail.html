@@ -1,0 +1,39 @@
+{% extends 'layout/default.html' %}
+
+{% block body-content %}
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+  <a class="btn btn-info" href="{% url 'secretary:instructor-create' %}">ADD NEW</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if user.is_superuser != True %}
+        <tr>
+          <th scope="row">{{ object.id }}</th>
+          <td>{{ object.username }}</td>
+          <td>{{ object.email }}</td>
+          <td><a href="{% url 'secretary:instructor-update' pk=object.id %}">edit</a></td>
+          <td><a href="{% url 'secretary:instructor-delete' pk=object.id %}">delete</a></td>
+
+          <!-- <td><a href="{% url 'secretary:instructor-update' pk=user.id %}">edit</a></td> -->
+          <!-- <td><a href="{% url 'secretary:instructor-delete' pk=user.id %}">delete</a></td> -->
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
