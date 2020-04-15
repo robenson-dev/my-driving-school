@@ -6,6 +6,10 @@ formation et de voir quand seront leurs prochains rendez-vous.
 
 
 ## `Dependencies`
+
+pip install -m requirements.txt
+
+
 install - pip:
 
     - python3 get-pip.py
@@ -18,8 +22,14 @@ install - pipenv:
 
 create Virtual Environments - pipenv:
 
-    - pipenv shell -> Virtual Environments
     - pipenv update or install -> install all dependencies
+    - pipenv shell -> Virtual Environments
+
+
+Start:
+    - cd /src
+    - pipenv runserver
+
 
 
 
