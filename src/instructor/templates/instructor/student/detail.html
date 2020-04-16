@@ -1,0 +1,39 @@
+{% extends 'layout/default.html' %}
+
+{% block body-content %}
+
+<form class="form" method="get">
+  <input type="search" name="user_search" value="">
+  <input type="submit">
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">username</th>
+      <th scope="col">Email</th>
+      <th scope="col">phone</th>
+      <th scope="col">Birthday</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+      {% if user.is_student == True %}
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.username}}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.student.phone }}</td>
+        <td>{{ user.student.birthday }}</td>
+        <td>{{ user.student.address }}</td>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

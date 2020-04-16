@@ -1,0 +1,47 @@
+{% extends 'layout/default.html' %}
+
+{% block body-content %}
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">title</th>
+        <th scope="col">color</th>
+        <th scope="col">start</th>
+        <th scope="col">end</th>
+        <th scope="col">created</th>
+        <th scope="col">personne</th>
+        <th scope="col">edit</th>
+        <th scope="col">delete</th>
+      </tr>
+    </thead>
+    <tbody>
+            <tr>
+              <th scope="row">{{ object.id }}</th>
+              <th>{{ object.title }}</th>
+              <td>{{ object.color_event }}</td>
+              <td>{{ object.start }}</td>
+              <td>{{ object.end }}</td>
+              {% if object.creator.is_instructor == True %}
+
+                <td>{{ object.creator }} - (instructor)</td>
+                {% elif object.creator.is_student == True %}
+                <td>{{ object.creator }} - (student)</td>
+
+              {% endif %}
+
+              {% if object.person.is_instructor == True %}
+
+                <td>{{ object.person }} - (instructor)</td>
+                {% elif object.person.is_student == True %}
+                <td>{{ object.person }} - (student)</td>
+
+              {% endif %}
+              <td><a href="{% url 'secretary:appointment-update' pk=user.id %}">edit</a></td>
+              <td><a href="{% url 'secretary:appointment-delete' pk=user.id %}">delete</a></td>
+            </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

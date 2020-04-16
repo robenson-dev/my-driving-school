@@ -1,0 +1,58 @@
+{% extends 'layout/default.html' %}
+
+{% block body-content %}
+
+<form class="form" method="get">
+  <input type="search" name="user_search" value="">
+  <input type="submit">
+</form>
+
+<div class="ui container">
+
+  <br />
+  <div class="ui container">
+    <div class="ui grid">
+      <div class="ui sixteen column">
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<input type="hidden" id ="likes" data-json="{{ qs_json }}"  name="" value="">
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+  $(document).ready(function () {
+
+    const json_obj = JSON.parse($('#likes').attr("data-json"))
+
+    $("#calendar").fullCalendar({
+      header: {
+        left: "prev,next today",
+        center: "title",
+        right: "month,basicWeek,basicDay"
+      },
+      defaultDate: "2020-01-01",
+      navLinks: true,
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: json_obj.map(x => JSON.parse(JSON.stringify(
+        {
+          title: x.fields.title,
+          start: x.fields.start,
+          end: x.fields.end,
+          url: x.fields.url,
+          color: x.fields.color_event
+        }
+      )))
+    });
+
+  });
+
+</script>
+{% endblock %}
