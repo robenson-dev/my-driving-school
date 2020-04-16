@@ -19,7 +19,7 @@ class EventAdmin(admin.ModelAdmin):
                     ("title", "color_event"),
                     ("description",),
                     ("start", "end"),
-                    ("creator"),
+                    ("creator", "person"),
                     ("address")
                 ]
             },

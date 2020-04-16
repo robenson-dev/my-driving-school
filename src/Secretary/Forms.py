@@ -1,5 +1,4 @@
 from django.forms import ModelForm
-from .models import Instructor
 from django.contrib.auth.models import User
 
 

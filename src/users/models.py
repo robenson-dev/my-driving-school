@@ -19,7 +19,10 @@ class User(AbstractUser):
     is_student    = models.BooleanField(default=False)
 
     def get_absolute_url(self):
-        return reverse('secretary:instructor-detail',kwargs={'pk': self.pk})
+        if self.is_instructor == True:
+            return reverse('secretary:instructor-detail',kwargs={'pk': self.pk})
+        elif self.is_student == True:
+            return reverse('secretary:student-detail',kwargs={'pk': self.pk})
 
     def get_update_url(self):
         return reverse('secretary:instructor-update',kwargs={'pk':self.pk})
@@ -63,7 +66,6 @@ class Instructor(models.Model):
     address = models.CharField(max_length=255, blank=True)
     avatar = models.ImageField(default='user/Instructor/default.png', upload_to='user/', null=True, blank=True)
     bio = RichTextField(blank=True)
-
 
     def greet(self):
         gender = self.get_gender_display()

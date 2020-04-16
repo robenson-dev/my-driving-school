@@ -9,7 +9,7 @@
       </div>
     {% endfor %}
   {% endif %}
-  <a class="btn btn-info" href="{% url 'secretary:instructor-create' %}">ADD NEW</a>
+  <a class="btn btn-info" href="{% url 'secretary:student-create' %}">ADD NEW</a>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -21,13 +21,13 @@
       </tr>
     </thead>
     <tbody>
-      {% if user.is_superuser != True and user.is_instructor == True %}
+      {% if user.is_superuser != True and user.is_student == True %}
         <tr>
           <th scope="row">{{ object.id }}</th>
           <td>{{ object.username }}</td>
           <td>{{ object.email }}</td>
-          <td><a href="{% url 'secretary:instructor-update' pk=object.id %}">edit</a></td>
-          <td><a href="{% url 'secretary:instructor-delete' pk=object.id %}">delete</a></td>
+          <td><a href="{% url 'secretary:student-update' pk=object.id %}">edit</a></td>
+          <td><a href="{% url 'secretary:student-delete' pk=object.id %}">delete</a></td>
         </tr>
       {% endif %}
     </tbody>

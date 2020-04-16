@@ -1,6 +1,6 @@
 from django.db import models
 from users.models import User
-
+from django.urls import reverse
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
 
@@ -19,10 +19,17 @@ class Event(models.Model):
         verbose_name="creator",
         related_name='snippets'
     )
+    person = models.ManyToManyField(User,
+        blank=True,
+        verbose_name="person",
+    )
     created_on = models.DateTimeField("created on", auto_now_add=True)
     updated_on = models.DateTimeField("updated on", auto_now=True)
     color_event = ColorField("Color event", blank=True, max_length=10, default='#FFC0CB')
     address = models.CharField(max_length=255, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('secretary:appointment-detail',kwargs={'pk':self.pk})
 
     class Meta:
         verbose_name = "event"
