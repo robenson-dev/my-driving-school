@@ -12,6 +12,7 @@ django-ckeditor = "*"
 pillow = "*"
 django-crispy-forms = "*"
 django-colorfield = "*"
+stripe = "*"
 
 [requires]
 python_version = "3.7"
