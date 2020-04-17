@@ -1,0 +1,42 @@
+{% extends 'layout/default.html' %}
+
+{% block body-content %}
+
+<a class="btn btn-info" href="{% url 'instructor:appointment-create' %}">ADD NEW</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">title</th>
+      <th scope="col">color</th>
+      <th scope="col">start</th>
+      <th scope="col">end</th>
+      <th scope="col">created</th>
+      <th scope="col">edit</th>
+      <th scope="col">delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for planning in events %}
+          <tr>
+            <th scope="row">{{ planning.id }}</th>
+            <th>{{ planning.title }}</th>
+            <td>{{ planning.color_event }}</td>
+            <td>{{ planning.start }}</td>
+            <td>{{ planning.end }}</td>
+            {% if planning.creator.is_instructor == True %}
+
+              <td>{{ planning.creator }} - (instructor)</td>
+              {% elif planning.creator.is_student == True %}
+              <td>{{ planning.creator }} - (student)</td>
+
+            {% endif %}
+            
+            <td><a href="{% url 'instructor:appointment-update' pk=planning.id %}">edit</a></td>
+            <td><a href="{% url 'instructor:appointment-delete' pk=planning.id %}">delete</a></td>
+          </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

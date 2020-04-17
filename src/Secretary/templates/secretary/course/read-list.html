@@ -9,6 +9,9 @@
       </div>
     {% endfor %}
   {% endif %}
+  {% if user.is_secretary %}
+    <a class="btn btn-info" href="{% url 'secretary:course-create' %}">ADD NEW</a>
+  {% endif %}
   <table class="table table-striped">
     <thead>
       <tr>
@@ -16,17 +19,24 @@
         <th scope="col">title</th>
         <th scope="col">time</th>
         <th scope="col">price</th>
-        <th scope="col">Delete</th>
+        <th scope="col">details</th>
       </tr>
     </thead>
     <tbody>
       {% for course in course_form %}
+      <!-- {{ user.subscription.valid }} -->
         <tr>
           <th scope="row">{{ course.id }}</th>
           <td>{{ course.course_name }}</td>
           <td>{{ course.course_time }}</td>
           <td>{{ course.course_price }}$</td>
-          <td><a href="{% url 'secretary:course-detail' pk=course.id %}">read</a></td>
+          <td>
+            {% if user.subscription.valid == True %}
+              <a class="">allready</a>
+              {% else %}
+              <a href="{% url 'secretary:course-detail' pk=course.id %}">read</a>
+            {% endif %}
+          </td>
         </tr>
     {% endfor %}
     </tbody>

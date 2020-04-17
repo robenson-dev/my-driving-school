@@ -2,6 +2,13 @@
 
 {% block body-content %}
 <div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
   <table class="table table-striped">
     <thead>
       <tr>
@@ -11,7 +18,6 @@
         <th scope="col">start</th>
         <th scope="col">end</th>
         <th scope="col">created</th>
-        <th scope="col">personne</th>
         <th scope="col">edit</th>
         <th scope="col">delete</th>
       </tr>
@@ -31,15 +37,15 @@
 
               {% endif %}
 
-              {% if object.person.is_instructor == True %}
+              <!-- {% if object.person.is_instructor == True %}
 
                 <td>{{ object.person }} - (instructor)</td>
                 {% elif object.person.is_student == True %}
                 <td>{{ object.person }} - (student)</td>
 
-              {% endif %}
-              <td><a href="{% url 'secretary:appointment-update' pk=user.id %}">edit</a></td>
-              <td><a href="{% url 'secretary:appointment-delete' pk=user.id %}">delete</a></td>
+              {% endif %} -->
+              <td><a href="{% url 'secretary:appointment-update' pk=object.id %}">edit</a></td>
+              <td><a href="{% url 'secretary:appointment-delete' pk=object.id %}">delete</a></td>
             </tr>
     </tbody>
   </table>

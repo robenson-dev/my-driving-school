@@ -19,9 +19,10 @@ class Event(models.Model):
         verbose_name="creator",
         related_name='snippets'
     )
-    person = models.ManyToManyField(User,
+    person = models.OneToOneField(User,
         blank=True,
         verbose_name="person",
+        on_delete=models.CASCADE
     )
     created_on = models.DateTimeField("created on", auto_now_add=True)
     updated_on = models.DateTimeField("updated on", auto_now=True)

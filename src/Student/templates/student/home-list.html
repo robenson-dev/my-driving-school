@@ -1,0 +1,21 @@
+{% extends 'layout/default.html' %}
+
+{% block body-header %}
+{% endblock %}
+
+{% block body-content %}
+  <p>
+    {% if user.subscription.valid == True %}
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active">
+          {{ user.subscription.course.course_name }} -
+          {{ user.subscription.course.course_price }}$
+        </a>
+      </div>
+      {% else %}
+      <p class="text-danger">sorry you have no subscription</p>
+    {% endif %}
+  </p>
+
+
+{% endblock %}

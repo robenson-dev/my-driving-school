@@ -19,7 +19,6 @@
         <th scope="col">start</th>
         <th scope="col">end</th>
         <th scope="col">created</th>
-        <th scope="col">personne</th>
         <th scope="col">edit</th>
         <th scope="col">delete</th>
       </tr>
@@ -39,14 +38,13 @@
                 <td>{{ planning.creator }} - (student)</td>
 
               {% endif %}
-
-              {% if planning.person.is_instructor == True %}
+              <!-- {% if planning.person.is_instructor == True %}
 
                 <td>{{ planning.person }} - (instructor)</td>
                 {% elif planning.person.is_student == True %}
                 <td>{{ planning.person }} - (student)</td>
 
-              {% endif %}
+              {% endif %} -->
               <td><a href="{% url 'secretary:appointment-update' pk=planning.id %}">edit</a></td>
               <td><a href="{% url 'secretary:appointment-delete' pk=planning.id %}">delete</a></td>
             </tr>

@@ -16,6 +16,7 @@ from django.db.models import Q
 from users.models import User
 from planning.models import Event
 from Secretary.models import Course
+from Student.models import Subscription
 
 from users.forms import UserRegisterForm
 
@@ -190,6 +191,17 @@ def planning_filter(request):
 
 
 #------------------------------------------------------------------------------[ COURSE ]-----------------------------------------------------------------#
+class CourseCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+
+    model = Course
+    fields = '__all__'
+    template_name = 'secretary/course/create.html'
+    success_message = f' The event has been created'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
 
 class CourseListView(LoginRequiredMixin, ListView):
 
@@ -217,6 +229,7 @@ def detail_course(request, pk):
             description=course.course_name,
         )
 
+        Subscription.objects.create(course=course, user=request.user, valid=True)
         messages.success(request, f'thank you for purchasing our course')
 
         return redirect('secretary:course-list')

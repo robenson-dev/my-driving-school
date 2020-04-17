@@ -18,7 +18,8 @@ from .views import (
     EventUpdateView,
     EventDeleteView,
 
-    CourseListView
+    CourseListView,
+    CourseCreateView
 )
 from . import views
 
@@ -53,7 +54,8 @@ urlpatterns = [
     ])),
     path('course/', include([
         path('', CourseListView.as_view(), name='course-list'),
-        path('<int:pk>/', views.detail_course, name='course-detail')
+        path('<int:pk>/', views.detail_course, name='course-detail'),
+        path('create/', CourseCreateView.as_view(), name="course-create"),
     ]))
 
 ]

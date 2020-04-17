@@ -16,6 +16,7 @@
         <th scope="col">#</th>
         <th scope="col">username</th>
         <th scope="col">Email</th>
+        <th scope="col">Details</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
@@ -27,6 +28,7 @@
               <th scope="row">{{ user.id }}</th>
               <td>{{ user.username }}</td>
               <td>{{ user.email }}</td>
+              <td><a href="{% url 'secretary:student-detail' pk=user.id %}">read</a></td>
               <td><a href="{% url 'secretary:student-update' pk=user.id %}">edit</a></td>
               <td><a href="{% url 'secretary:student-delete' pk=user.id %}">delete</a></td>
             </tr>
